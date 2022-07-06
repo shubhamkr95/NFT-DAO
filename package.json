@@ -1,0 +1,19 @@
+{
+  "name": "nft-dao",
+  "version": "1.0.0",
+  "description": "DAO which uses ERC 721 voting mechanism",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shubhamkr95/NFT-DAO.git"
+  },
+  "author": "Shubham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shubhamkr95/NFT-DAO/issues"
+  },
+  "homepage": "https://github.com/shubhamkr95/NFT-DAO#readme"
+}
