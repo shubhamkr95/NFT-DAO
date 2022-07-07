@@ -10,7 +10,7 @@ contract GovernToken is ERC721, EIP712, ERC721Votes {
  using Counters for Counters.Counter;
  Counters.Counter private _tokenIdCounter;
 
- address payable vault;
+ address payable public vault;
 
  constructor(address payable _vault)
   ERC721("GovernToken", "GTK")
