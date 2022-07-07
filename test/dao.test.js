@@ -9,4 +9,7 @@ describe("Govern", async () => {
  let governToken;
  let TimeLock;
  let timelock;
+ let GovernorContract;
+ let governorContract;
+ let proposalID;
 });
