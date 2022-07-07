@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "@openzeppelin/contracts@4.7.0/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts@4.7.0/utils/cryptography/draft-EIP712.sol";
-import "@openzeppelin/contracts@4.7.0/token/ERC721/extensions/draft-ERC721Votes.sol";
-import "@openzeppelin/contracts@4.7.0/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/draft-ERC721Votes.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract GovernToken is ERC721, EIP712, ERC721Votes {
  using Counters for Counters.Counter;
