@@ -6,15 +6,15 @@ import "@openzeppelin/contracts@4.7.0/utils/cryptography/draft-EIP712.sol";
 import "@openzeppelin/contracts@4.7.0/token/ERC721/extensions/draft-ERC721Votes.sol";
 import "@openzeppelin/contracts@4.7.0/utils/Counters.sol";
 
-contract MyToken is ERC721, EIP712, ERC721Votes {
+contract GovernToken is ERC721, EIP712, ERC721Votes {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
     address payable vault;
 
     constructor(address payable _vault)
-        ERC721("MyToken", "MTK")
-        EIP712("MyToken", "1")
+        ERC721("GovernToken", "GTK")
+        EIP712("GovernToken", "1")
     {
         vault = _vault;
     }
