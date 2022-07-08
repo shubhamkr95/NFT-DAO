@@ -16,15 +16,22 @@ contract Governance is
  GovernorVotesQuorumFraction,
  GovernorTimelockControl
 {
- constructor(IVotes _token, TimelockController _timelock)
+ constructor(
+  IVotes _token, 
+  TimelockController _timelock,
+  uint256 _votingDelay,
+  uint256 _votingPeriod,
+  uint256 _proposalThreshold,
+  uint256 _quorumPercentage
+  )
   Governor("Governance")
   GovernorSettings(
-   0, /* 0 block after proposal created */
-   14, /* 5 minute */
-   1 /*Proposal Threshold*/
+   _votingDelay,
+   _votingPeriod,
+   _proposalThreshold
   )
   GovernorVotes(_token)
-  GovernorVotesQuorumFraction(4)
+  GovernorVotesQuorumFraction(_quorumPercentage)
   GovernorTimelockControl(_timelock)
  {}
 
