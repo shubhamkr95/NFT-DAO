@@ -129,5 +129,16 @@ describe("Govern", async () => {
   );
 
   expect(await governorContract.state(proposalID)).to.equal(5);
+
+  await governorContract.execute(
+   [treasury.address],
+   [0],
+   [treasury.interface.encodeFunctionData("withdrawFunds", [receiver.address, ethers.utils.parseEther("3", "ether")])],
+   ethers.utils.keccak256(ethers.utils.toUtf8Bytes("Send-Ethers"))
+  );
+
+  expect(await governorContract.state(proposalID)).to.equal(7);
+
+  expect(await treasury.balance()).to.equal(ethers.utils.parseEther("2", "ether"));
  });
 });
