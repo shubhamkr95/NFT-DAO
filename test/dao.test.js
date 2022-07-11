@@ -12,8 +12,8 @@ describe("Govern", async () => {
  let GovernorContract;
  let governorContract;
  let proposalID;
- let tokenID;
- let delegateTxn;
+ // let tokenID;
+ // let delegateTxn;
  let proposalRole;
  let grantProposalRole;
 
@@ -58,10 +58,13 @@ describe("Govern", async () => {
 
   // mint nft to user
   await governToken.safeMint(address1.address, "ipfs://bafybeibfhnw4uspjj2akxzkbeia4fxv37gkyvvs2skja5tomlcv3soo2hm/");
+  await governToken.safeMint(address2.address, "https://ipfs.io/ipfs/QmW3FgNGeD46kHEryFUw1ftEUqRw254WkKxYeKaouz7DJA");
+  await governToken.safeMint(address3.address, "http://ipfs.pics/ipfs/Qmep61aZqJhhmSkhQHUSUme5RFbi8ZfccxXC1TyjKHcEig");
+  await governToken.safeMint(address4.address, "http://ipfs.pics/ipfs/QmXr1iejP2zHptFFDr3hycZvbaXaQNwrK6VVXYbxFAYQ7x");
 
   // delegate the user
-  delegateTxn = await governToken.connect(address1).delegate(address1.address);
-  tokenID = delegateTxn.value.toString();
+  await governToken.connect(address1).delegate(address1.address);
+  await governToken.connect(address2).delegate(address2.address);
  });
 
  it("Should grant the proposal role", async () => {
