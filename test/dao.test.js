@@ -12,13 +12,11 @@ describe("Govern", async () => {
  let GovernorContract;
  let governorContract;
  let proposalID;
- // let tokenID;
- // let delegateTxn;
  let proposalRole;
  let grantProposalRole;
 
  beforeEach(async () => {
-  [sender, address1, address2, address3, address4] = await ethers.getSigners();
+  [address1, address2, address3, address4, sender, receiver] = await ethers.getSigners();
 
   // GovernToken
   GovernToken = await ethers.getContractFactory("GovernToken");
@@ -65,6 +63,8 @@ describe("Govern", async () => {
   // delegate the user
   await governToken.connect(address1).delegate(address1.address);
   await governToken.connect(address2).delegate(address2.address);
+  await governToken.connect(address3).delegate(address3.address);
+  await governToken.connect(address4).delegate(address4.address);
  });
 
  it("Should grant the proposal role", async () => {
@@ -78,5 +78,23 @@ describe("Govern", async () => {
   expect(await treasury.owner()).to.equal(timelock.address);
 
   expect(await treasury.balance()).to.equal(ethers.utils.parseEther("5"));
+ });
+
+ it("Generate the proposal", async () => {
+  proposalRole = await timelock.PROPOSER_ROLE();
+  grantProposalRole = await timelock.grantRole(proposalRole, governorContract.address);
+
+  const txn = await governorContract.propose(
+   [treasury.address],
+   [0],
+   [treasury.interface.encodeFunctionData("withdrawFunds", [receiver.address, ethers.utils.parseEther("3", "ether")])],
+   "Send-Ethers"
+  );
+
+  const txnWait = await txn.wait();
+  proposalID = txnWait.events[0].args.proposalId.toString();
+  await mineBlocks(1); //mine 1 block
+
+  expect(await governorContract.state(proposalID)).to.equal(1);
  });
 });
