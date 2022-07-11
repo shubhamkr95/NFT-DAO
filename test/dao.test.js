@@ -80,7 +80,7 @@ describe("Govern", async () => {
   expect(await treasury.balance()).to.equal(ethers.utils.parseEther("5"));
  });
 
- it("Generate the proposal", async () => {
+ it("Generate the proposal ID", async () => {
   proposalRole = await timelock.PROPOSER_ROLE();
   grantProposalRole = await timelock.grantRole(proposalRole, governorContract.address);
 
@@ -96,5 +96,38 @@ describe("Govern", async () => {
   await mineBlocks(1); //mine 1 block
 
   expect(await governorContract.state(proposalID)).to.equal(1);
+ });
+
+ it("Vote for then queue the proposal and execute", async () => {
+  proposalRole = await timelock.PROPOSER_ROLE();
+  grantProposalRole = await timelock.grantRole(proposalRole, governorContract.address);
+
+  const txn = await governorContract.propose(
+   [treasury.address],
+   [0],
+   [treasury.interface.encodeFunctionData("withdrawFunds", [receiver.address, ethers.utils.parseEther("3", "ether")])],
+   "Send-Ethers"
+  );
+
+  const txnWait = await txn.wait();
+  proposalID = txnWait.events[0].args.proposalId.toString();
+  await mineBlocks(1); //mine 1 block
+
+  await governorContract.connect(address1).castVote(proposalID, 1);
+  await governorContract.connect(address2).castVote(proposalID, 1);
+  await governorContract.connect(address3).castVote(proposalID, 1);
+  await governorContract.connect(address4).castVote(proposalID, 1);
+
+  await mineBlocks(10);
+  expect(await governorContract.state(proposalID)).to.equal(4);
+
+  await governorContract.queue(
+   [treasury.address],
+   [0],
+   [treasury.interface.encodeFunctionData("withdrawFunds", [receiver.address, ethers.utils.parseEther("3", "ether")])],
+   ethers.utils.keccak256(ethers.utils.toUtf8Bytes("Send-Ethers"))
+  );
+
+  expect(await governorContract.state(proposalID)).to.equal(5);
  });
 });
