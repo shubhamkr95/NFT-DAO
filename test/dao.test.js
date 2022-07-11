@@ -47,9 +47,6 @@ describe("Govern", async () => {
   treasury = await Treasury.deploy();
   await treasury.deployed();
 
-  // mint nft to user
-  await governToken.safeMint(address1.address, "ipfs://bafybeibfhnw4uspjj2akxzkbeia4fxv37gkyvvs2skja5tomlcv3soo2hm/");
-
   // send 5 ether to treasury
   const txn = await sender.sendTransaction({
    to: treasury.address,
@@ -58,6 +55,9 @@ describe("Govern", async () => {
   await txn.wait();
 
   await treasury.transferOwnership(timelock.address);
+
+  // mint nft to user
+  await governToken.safeMint(address1.address, "ipfs://bafybeibfhnw4uspjj2akxzkbeia4fxv37gkyvvs2skja5tomlcv3soo2hm/");
 
   // delegate the user
   delegateTxn = await governToken.connect(address1).delegate(address1.address);
