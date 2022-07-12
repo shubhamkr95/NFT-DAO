@@ -18,5 +18,11 @@ module.exports = {
   runOnCompile: true,
   disambiguatePaths: false,
  },
+ paths: {
+  sources: "./contracts",
+  tests: "./test",
+  cache: "./cache",
+  artifacts: "./artifacts",
+ },
  plugins: ["solidity-coverage"],
 };
