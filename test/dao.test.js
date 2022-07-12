@@ -16,7 +16,7 @@ describe("Govern", async () => {
  let grantProposalRole;
 
  beforeEach(async () => {
-  [address1, address2, address3, address4, sender, receiver] = await ethers.getSigners();
+  [address1, address2, address3, address4, sender, receiver, voteReceiver] = await ethers.getSigners();
 
   // GovernToken
   GovernToken = await ethers.getContractFactory("GovernToken");
@@ -140,5 +140,69 @@ describe("Govern", async () => {
   expect(await governorContract.state(proposalID)).to.equal(7);
 
   expect(await treasury.balance()).to.equal(ethers.utils.parseEther("2", "ether"));
+ });
+
+ it("Vote against the proposal", async () => {
+  proposalRole = await timelock.PROPOSER_ROLE();
+  grantProposalRole = await timelock.grantRole(proposalRole, governorContract.address);
+
+  const txn = await governorContract.propose(
+   [treasury.address],
+   [0],
+   [treasury.interface.encodeFunctionData("withdrawFunds", [receiver.address, ethers.utils.parseEther("3", "ether")])],
+   "Send-Ethers"
+  );
+
+  const txnWait = await txn.wait();
+  proposalID = txnWait.events[0].args.proposalId.toString();
+  await mineBlocks(1); //mine 1 block
+
+  await governorContract.connect(address1).castVote(proposalID, 0);
+  await governorContract.connect(address2).castVote(proposalID, 0);
+  await governorContract.connect(address3).castVote(proposalID, 0);
+  await governorContract.connect(address4).castVote(proposalID, 0);
+
+  await mineBlocks(10);
+  expect(await governorContract.state(proposalID)).to.equal(3);
+
+  await expect(
+   governorContract.queue(
+    [treasury.address],
+    [0],
+    [treasury.interface.encodeFunctionData("withdrawFunds", [receiver.address, ethers.utils.parseEther("3", "ether")])],
+    ethers.utils.keccak256(ethers.utils.toUtf8Bytes("Send-Ethers"))
+   )
+  ).to.be.reverted;
+
+  expect(
+   governorContract.execute(
+    [treasury.address],
+    [0],
+    [treasury.interface.encodeFunctionData("withdrawFunds", [receiver.address, ethers.utils.parseEther("3", "ether")])],
+    ethers.utils.keccak256(ethers.utils.toUtf8Bytes("Send-Ethers"))
+   )
+  ).to.be.reverted;
+ });
+
+ it("cannot change casted vote", async () => {
+  proposalRole = await timelock.PROPOSER_ROLE();
+  grantProposalRole = await timelock.grantRole(proposalRole, governorContract.address);
+
+  const txn = await governorContract.propose(
+   [treasury.address],
+   [0],
+   [treasury.interface.encodeFunctionData("withdrawFunds", [receiver.address, ethers.utils.parseEther("3", "ether")])],
+   "Send-Ethers"
+  );
+
+  const txnWait = await txn.wait();
+  proposalID = txnWait.events[0].args.proposalId.toString();
+  await mineBlocks(1); //mine 1 block
+
+  await governorContract.connect(address1).castVote(proposalID, 1);
+  const tokedIDOwner = await governToken.ownerOf(0);
+  await mineBlocks(3);
+
+  await expect(governorContract.connect(address1).castVote(proposalID, 0)).to.be.reverted;
  });
 });
