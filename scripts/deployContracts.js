@@ -46,7 +46,8 @@ async function main() {
 
  // transfer proposal role to the governor address
  const proposalRole = await timeLock.PROPOSER_ROLE();
- await timeLock.grantRole(proposalRole, governorContract.address);
+ const grantRoleTxn = await timeLock.grantRole(proposalRole, governorContract.address);
+ console.log(`grant role to govern transaction hash ${grantRoleTxn.hash} \n`);
 
  // revoke owner admin role from timelock
  const timeLockAdminRole = await timeLock.TIMELOCK_ADMIN_ROLE();
