@@ -28,7 +28,7 @@ async function main() {
  const governorContract = await GovernorContract.deploy(
   governToken.address,
   timeLock.address,
-  1, //voting delay -0 block delay
+  1, //voting delay - 1 block delay
   14, //voting period - 3 minute
   1, //proposal threshold - 1 NFT
   4 //quorum percentage - 4 percent
