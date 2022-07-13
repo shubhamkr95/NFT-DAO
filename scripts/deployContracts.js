@@ -18,6 +18,13 @@ async function main() {
  await timeLock.deployed();
 
  console.log(`Timelock address ${timeLock.address}`);
+
+ // Deploying Governor
+ const GovernorContract = await ethers.getContractFactory("Governance");
+ const governorContract = await GovernorContract.deploy();
+ await governorContract.deployed();
+
+ console.log(`Governor address ${governorContract.address}`);
 }
 
 main()
