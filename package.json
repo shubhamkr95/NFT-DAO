@@ -27,6 +27,7 @@
     "hardhat": "^2.9.9"
   },
   "devDependencies": {
+    "@nomiclabs/hardhat-etherscan": "^3.1.0",
     "chai": "^4.3.6",
     "eslint": "^8.15.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -38,6 +39,7 @@
     "eslint-plugin-react": "^7.29.4",
     "ethereum-waffle": "^3.4.4",
     "hardhat-contract-sizer": "^2.6.1",
+    "hardhat-gas-reporter": "^1.0.8",
     "nodemon": "^2.0.16",
     "prettier": "^2.6.2",
     "solhint": "^3.3.7",
