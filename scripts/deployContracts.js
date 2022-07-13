@@ -9,6 +9,15 @@ async function main() {
  const GovernToken = await ethers.getContractFactory("GovernToken");
  const governToken = await GovernToken.deploy();
  await governToken.deployed();
+
+ console.log(`GovernToken address ${governToken.address}`);
+
+ //Deploying TimeLock
+ const TimeLock = await ethers.getContractFactory("TimeLock");
+ const timeLock = await TimeLock.deploy();
+ await timeLock.deployed();
+
+ console.log(`Timelock address ${timeLock.address}`);
 }
 
 main()
