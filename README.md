@@ -1,26 +1,16 @@
 # ERC721 ON-CHAIN-DAO
 
-- [ERC721 ON-CHAIN-DAO](#ERC-721-on-chainDAO)
+## About
 
-  - [About](#about)
-  - [Requirements](#requirements)
-  - [Contracts](contracts)
-  - [Testing](Testing)
-  - [Code style](code-style)
-  - [License](#license)
-  - [Deployed address](#deployed-address)
+- A on-chain DAO with ERC 721 voting mechanism. In this a user can vote on any proposal only if the user has the ERC 721 governance token
 
-  ## About
+## Requirements
 
-  - A on-chain DAO with ERC 721 voting mechanism. In this a user can vote on any proposal only if the user has the ERC 721 governance token
-
-  ## Requirements
-
-  - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-    - You'll know you did it right if you can run git --version and you see a response like git version x.x.x
-  - [NodeJS](https://nodejs.org/en/)
-    - You'll know you've installed nodejs right if you can run:
-      node --version and get an output like: vx.x.x
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+  - You'll know you did it right if you can run git --version and you see a response like git version x.x.x
+- [NodeJS](https://nodejs.org/en/)
+  - You'll know you've installed nodejs right if you can run:
+    node --version and get an output like: vx.x.x
 
 ## Contracts
 
