@@ -5,12 +5,6 @@
   - [About](#about)
   - [Requirements](#requirements)
   - [Contracts](contracts)
-
-    - [GovernToken](#governToken)
-    - [TimeLock](timelock)
-    - [Governance](governance)
-    - [Treasury](treasury)
-
   - [Testing](Testing)
   - [Code style](code-style)
   - [License](#license)
@@ -28,16 +22,16 @@
     - You'll know you've installed nodejs right if you can run:
       node --version and get an output like: vx.x.x
 
-## Contracts:
+## Contracts
 
 1. ### GovernToken
 
-   - Token type: ERC-721
-   - Token name: GovernToken
-   - Token symbol: GTK
-   - Users can delegate their voting power to themselves or others in order to create a snapshot of their voting power
-   - Each token gives 1 voting power
-   - Only owner can mint token to the required address
+- Token type: ERC-721
+- Token name: GovernToken
+- Token symbol: GTK
+- Users can delegate their voting power to themselves or others in order to create a snapshot of their voting power
+- Each token gives 1 voting power
+- Only owner can mint token to the required address
 
 2. ### TimeLock
 
