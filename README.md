@@ -1,18 +1,36 @@
 # ERC721 ON-CHAIN-DAO
 
-- ### A on-chain DAO with ERC 721 voting mechanism
+- [ERC721 ON-CHAIN-DAO](#ERC-721-on-chainDAO)
 
-## Requirements
+  - [About](#about)
+  - [Requirements](#requirements)
+  - [Contracts](contracts)
 
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-  - You'll know you did it right if you can run git --version and you see a response like git version x.x.x
-- [NodeJS](https://nodejs.org/en/)
-  - You'll know you've installed nodejs right if you can run:
-    node --version and get an output like: vx.x.x
+    - [GovernToken](#governToken)
+    - [TimeLock](timelock)
+    - [Governance](governance)
+    - [Treasury](treasury)
+
+  - [Testing](Testing)
+  - [Code style](code-style)
+  - [License](#license)
+  - [Deployed address](#deployed-address)
+
+  ## About
+
+  - A on-chain DAO with ERC 721 voting mechanism. In this a user can vote on any proposal only if the user has the ERC 721 governance token
+
+  ## Requirements
+
+  - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+    - You'll know you did it right if you can run git --version and you see a response like git version x.x.x
+  - [NodeJS](https://nodejs.org/en/)
+    - You'll know you've installed nodejs right if you can run:
+      node --version and get an output like: vx.x.x
 
 ## Contracts:
 
-1. ### GovernToken.sol
+1. ### GovernToken
 
    - Token type: ERC-721
    - Token name: GovernToken
@@ -21,13 +39,13 @@
    - Each token gives 1 voting power
    - Only owner can mint token to the required address
 
-2. ### TimeLock.sol
+2. ### TimeLock
 
    - This the the owner of the treasury contract
    - After completion of minimum delay the successful proposal is being executed
    - Any one can execute the the passed proposal
 
-3. ### Governance.sol
+3. ### Governance
 
    - This contracts creates a DAO ecosystem in which users which holds a minimum of 1 ERC 721 token can create a proposal
    - Users can vote in favour or against the proposal and can also abstain their vote
@@ -56,7 +74,7 @@
         7           Executed
      ```
 
-4. ### Treasury.sol
+4. ### Treasury
 
    - Anyone can donate their Ether in this contract
    - After Governance DAO ecosystem pass the proposal then the required amount will be transferred to the provided address
