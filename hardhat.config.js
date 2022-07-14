@@ -34,9 +34,7 @@ module.exports = {
   hardhat: {},
   mumbai: {
    url: POLYGON_API_URL,
-   accounts: {
-    mnemonic: POLYGON_PRIVATE_KEY,
-   },
+   accounts: [POLYGON_PRIVATE_KEY],
   },
  },
  etherscan: {
