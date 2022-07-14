@@ -23,21 +23,30 @@
 
    - This contracts creates a DAO ecosystem in which users which holds a minimum of 1 ERC 721 token can create a proposal
    - Users can vote in favour or against the proposal and can also abstain their vote
+
+     ```
+      Choice         Meaning
+
+        0           Against the proposal
+        1           In favor of the proposal
+        2           Abstain
+     ```
+
    - Minimum of 4 percent voting participate required
    - A proposal is passed through the various stages
 
-   ```
-      Number          Stage
+     ```
+      Number         Stage
 
-      0               Pending
-      1               Active
-      2               Canceled
-      3               Defeated
-      4               Succeeded
-      5               Queued
-      6               Expired
-      7               Executed
-   ```
+        0           Pending
+        1           Active
+        2           Canceled
+        3           Defeated
+        4           Succeeded
+        5           Queued
+        6           Expired
+        7           Executed
+     ```
 
 4. ### Treasury.sol
 
