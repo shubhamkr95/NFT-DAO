@@ -2,6 +2,14 @@
 
 - ### A on-chain DAO with ERC 721 voting mechanism
 
+## Requirements
+
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+  - You'll know you did it right if you can run git --version and you see a response like git version x.x.x
+- [NodeJS](https://nodejs.org/en/)
+  - You'll know you've installed nodejs right if you can run:
+    node --version and get an output like: vx.x.x
+
 ## Contracts:
 
 1. ### GovernToken.sol
@@ -75,6 +83,10 @@ npx hardhat coverage
 ```
 npm run prettier:solidity
 ```
+
+## License
+
+Distributed under the MIT License. See LICENSE.txt for more information.
 
 ## Deployed address: Polygon-Mumbai
 
