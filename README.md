@@ -88,7 +88,7 @@ npm run prettier:solidity
 
 Distributed under the MIT License. See LICENSE.txt for more information.
 
-## Deployed address: Polygon-Mumbai
+## Deployed address
 
 GovernToken address: [0x2fFda8135aE1fc22b84EC6F8d185D8F3dFC9a352](https://mumbai.polygonscan.com/address/0x2fFda8135aE1fc22b84EC6F8d185D8F3dFC9a352)
 
