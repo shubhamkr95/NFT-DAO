@@ -29,10 +29,14 @@ module.exports = {
    },
   },
  },
- mumbai: {
-  url: POLYGON_API_URL,
-  accounts: {
-   mnemonic: POLYGON_PRIVATE_KEY,
+ defaultNetwork: "hardhat",
+ networks: {
+  hardhat: {},
+  mumbai: {
+   url: POLYGON_API_URL,
+   accounts: {
+    mnemonic: POLYGON_PRIVATE_KEY,
+   },
   },
  },
  etherscan: {
@@ -43,11 +47,6 @@ module.exports = {
   runOnCompile: true,
   disambiguatePaths: false,
  },
- paths: {
-  sources: "./contracts",
-  tests: "./test",
-  cache: "./cache",
-  artifacts: "./artifacts",
- },
+
  plugins: ["solidity-coverage"],
 };
