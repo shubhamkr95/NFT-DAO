@@ -2,8 +2,6 @@
 
 - ### A on-chain DAO with ERC 721 voting mechanism
 
----
-
 ## Contracts:
 
 1. ### GovernToken.sol
@@ -45,8 +43,6 @@
 
    - Anyone can donate their Ether in this contract
    - After Governance DAO ecosystem pass the proposal then the required amount will be transferred to the provided address
-
----
 
 ## Testing
 
