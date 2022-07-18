@@ -205,4 +205,48 @@ describe("Govern", async () => {
 
   await expect(governorContract.connect(address1).castVote(proposalID, 0)).to.be.reverted;
  });
+
+ it("Change the voting period through proposal", async () => {
+  proposalRole = await timelock.PROPOSER_ROLE();
+  grantProposalRole = await timelock.grantRole(proposalRole, governorContract.address);
+
+  const txn = await governorContract.propose(
+   [governorContract.address],
+   [0],
+   [governorContract.interface.encodeFunctionData("setVotingPeriod", [1565])],
+   "set-voting-period-to-1hr"
+  );
+
+  const txnWait = await txn.wait();
+  proposalID = txnWait.events[0].args.proposalId.toString();
+  await mineBlocks(1); //mine 1 block
+
+  await governorContract.connect(address1).castVote(proposalID, 1);
+  await governorContract.connect(address2).castVote(proposalID, 1);
+  await governorContract.connect(address3).castVote(proposalID, 1);
+  await governorContract.connect(address4).castVote(proposalID, 1);
+
+  await mineBlocks(10);
+  expect(await governorContract.state(proposalID)).to.equal(4);
+
+  await governorContract.queue(
+   [governorContract.address],
+   [0],
+   [governorContract.interface.encodeFunctionData("setVotingPeriod", [1565])],
+   ethers.utils.keccak256(ethers.utils.toUtf8Bytes("set-voting-period-to-1hr"))
+  );
+
+  expect(await governorContract.state(proposalID)).to.equal(5);
+
+  await governorContract.execute(
+   [governorContract.address],
+   [0],
+   [governorContract.interface.encodeFunctionData("setVotingPeriod", [1565])],
+   ethers.utils.keccak256(ethers.utils.toUtf8Bytes("set-voting-period-to-1hr"))
+  );
+
+  expect(await governorContract.state(proposalID)).to.equal(7);
+
+  expect(await governorContract.votingPeriod()).to.equal(1565);
+ });
 });
