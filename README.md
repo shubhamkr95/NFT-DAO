@@ -4,7 +4,7 @@
 
 - This is an on chain governance model in which anyone can create new proposal or vote using their NFT tokens. Users can get the tokens by requesting the [owner](https://mumbai.polygonscan.com/address/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B) of the [GovernToken](https://mumbai.polygonscan.com/address/0x2ffda8135ae1fc22b84ec6f8d185d8f3dfc9a352) contract to mint the ERC 721 token to their address and need to delegate themselves so that they can able to vote to pass or reject any proposal.
   Each ERC-721 token holds one voting power per user. User can create [proposals](https://mumbai.polygonscan.com/tx/0xeae0c5becc6e12701670a9144099a81170516829233031fd310ef313a7d183a9) in which they can provide the amount of Ether to be send from the treasury to the receiver address which is provided by the [Governance](https://mumbai.polygonscan.com/tx/0xeae0c5becc6e12701670a9144099a81170516829233031fd310ef313a7d183a9) contract only then after 1 block the voting period starts and the minimum voting participant is required to be around 4% of the total token holder. If the majority votes comes in favor then the proposal gets [queued](https://mumbai.polygonscan.com/tx/0xd1b19e844802bc62c229d55f049456bdc6f92a1f0d7e53852b73c8a81ab11541) and then [executed](https://mumbai.polygonscan.com/tx/0xa8f7cec847c9e538aa8fb3a5d9039b3c50deeee76ae0fc9a21835c4168095180)
-  by the [timelock](https://mumbai.polygonscan.com/address/0x15B6002738550e08a1896CF7ac99694031BF0dC8) contract which is the owner of the treasury.
+  after then only the [timelock](https://mumbai.polygonscan.com/address/0x15B6002738550e08a1896CF7ac99694031BF0dC8) contract which is the owner of the treasury will execute the operation.
 
 ## Requirements
 
