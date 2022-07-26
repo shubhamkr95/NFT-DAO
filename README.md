@@ -2,7 +2,9 @@
 
 ## About
 
-- A on-chain DAO with ERC 721 voting mechanism. In this a user can vote on any proposal only if the user has the ERC 721 governance token
+- This is an on chain governance model in which anyone can create new proposal or vote using their NFT tokens. Users can get the tokens by requesting the [owner](https://mumbai.polygonscan.com/address/0xa7f3c0D12481957A6FAc82cC4EC31f0f9f12843B) of the [GovernToken](https://mumbai.polygonscan.com/address/0x2ffda8135ae1fc22b84ec6f8d185d8f3dfc9a352) contract to mint the ERC 721 token to their address and need to delegate themselves so that they can able to vote to pass or reject any proposal.
+  Each ERC-721 token holds one voting power per user. User can create proposal in which they can provide the amount of Ether to be send from the treasury to the receiver address which is provided by the [Governance](https://mumbai.polygonscan.com/tx/0xeae0c5becc6e12701670a9144099a81170516829233031fd310ef313a7d183a9) contract only then after 1 block the voting period starts and the minimum voting participant is required to be around 4% of the total token holder. If the majority votes comes in favor then the proposal gets queued and then executed
+  by the [timelock](https://mumbai.polygonscan.com/address/0x15B6002738550e08a1896CF7ac99694031BF0dC8) contract which is the owner of the treasury.
 
 ## Requirements
 
