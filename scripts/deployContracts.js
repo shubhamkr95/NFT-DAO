@@ -1,9 +1,8 @@
 const { ethers } = require("hardhat");
 
 async function main() {
- const [deployer] = await ethers.getSigners();
-
- console.log(`Deploying Govern token contract with the account: ${deployer.address} \n`);
+ const [owner, proposer, vote1, executor] = await ethers.getSigners();
+ console.log(`Deploying Govern token contract with the account: ${owner.address} \n`);
 
  // Deploying token
  const GovernToken = await ethers.getContractFactory("GovernToken");
@@ -29,7 +28,7 @@ async function main() {
   governToken.address,
   timeLock.address,
   1, //voting delay - 1 block delay
-  14, //voting period - 3 minute
+  20, //voting period - 3 minute
   1, //proposal threshold - 1 NFT
   4 //quorum percentage - 4 percent
  );
@@ -51,11 +50,19 @@ async function main() {
 
  // revoke owner admin role from timelock
  const timeLockAdminRole = await timeLock.TIMELOCK_ADMIN_ROLE();
- await timeLock.revokeRole(timeLockAdminRole, deployer.address);
+ await timeLock.revokeRole(timeLockAdminRole, owner.address);
 
  //transfer ownership of treasury to timelock address
  await treasury.transferOwnership(timeLock.address);
  console.log(`New Treasury owner is ${await treasury.owner()} \n`);
+
+ // send ethers to treasury contract
+ const txn = await owner.sendTransaction({
+  to: treasury.address,
+  value: ethers.utils.parseEther("1"),
+ });
+ await txn.wait();
+ console.log(`Send 1 Rinkeby to treasury address`);
 }
 
 main()

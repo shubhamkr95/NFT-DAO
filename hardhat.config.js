@@ -13,7 +13,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  }
 });
 
-const { POLYGON_API_URL, POLYGON_PRIVATE_KEY, POLYGON_SCAN_KEY } = process.env;
+const { RINKEBY_API_URL, RINKEBY_PRIVATE_KEY, ETHERSCAN_KEY } = process.env;
 
 module.exports = {
  gasReporter: {
@@ -32,13 +32,15 @@ module.exports = {
  defaultNetwork: "hardhat",
  networks: {
   hardhat: {},
-  mumbai: {
-   url: POLYGON_API_URL,
-   accounts: [POLYGON_PRIVATE_KEY],
+  rinkeby: {
+   url: RINKEBY_API_URL,
+   accounts: {
+    mnemonic: RINKEBY_PRIVATE_KEY,
+   },
   },
  },
  etherscan: {
-  apiKey: POLYGON_SCAN_KEY,
+  apiKey: ETHERSCAN_KEY,
  },
  contractSizer: {
   alphaSort: true,
